@@ -3,7 +3,7 @@ import { galleryItems } from './gallery-items.js';
 const galleryRef = document.querySelector(".gallery");
 const imgMarkup = createGallery(galleryItems)
 
-galleryRef.addEventListener("click", zoomClick);
+galleryRef.addEventListener("click", handleZoomClick);
 galleryRef.insertAdjacentHTML("beforeend", imgMarkup);
 
 function createGallery(gallerItems) {
@@ -25,18 +25,18 @@ function createGallery(gallerItems) {
         .join(" ");
 }
 
-function zoomClick(event) {
+function handleZoomClick(event) {
     const imgCheck = event.target.classList.contains("gallery__image");
 
     if (!imgCheck) {
         return;
     }
 
-    zoomer(event);
+    handleZoome(event);
 };
 
 
-function zoomer(event) {
+function handleZoome(event) {
     event.preventDefault();
     const zoomImg = event.target.dataset.source;
     const inicial = basicLightbox.create(
@@ -54,8 +54,7 @@ function zoomer(event) {
     inicial.show();
     
     function closeZoom(event) {
-        console.log(event.code);
-        if (event.code = "Escape") {
+        if(event.key === "Escape") {
             inicial.close();
         }
     }
